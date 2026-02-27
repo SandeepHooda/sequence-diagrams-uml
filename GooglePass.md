@@ -1,4 +1,4 @@
-::: mermaid
+```mermaid
 sequenceDiagram
     autonumber
     actor User
@@ -30,3 +30,4 @@ sequenceDiagram
     %% Step 8: Callback Notification
     Google->>Walletron: POST /your-callback-endpoint ("add to wallet" event)
     Walletron-->>Google: 200 OK
+```
