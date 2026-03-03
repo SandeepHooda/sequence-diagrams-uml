@@ -21,10 +21,10 @@ sequenceDiagram
     Walletron-->>Client: HTTP 302 Redirect<br/>Location: https://pay.google.com/gp/v/save/{JWT}
     %% Step 6: Browser navigates to Google
     Client->>Google: Follow Redirect (GET /gp/v/save/{JWT})
-    Google-->>Client: Serve "Add to Google Wallet" UI
+    Google-->>Client: Google Serve "Add to Google Wallet" UI
     %% Step 7: User saves pass
-    Client->>User: Display Add to Wallet screen
-    User->>Client: Click "Add to Google Wallet"
+    Client->>User: Wallet Displays Add to Wallet screen
+    User->>Client: Click "Add to Google Wallet."
     Client->>Google: Confirm Save
     Note over Google: Pass associated with<br/>User's Google Account
     %% Step 8: Callback Notification
