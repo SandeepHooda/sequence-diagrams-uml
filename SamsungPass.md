@@ -14,19 +14,19 @@ sequenceDiagram
     Browser->>Walletron: POST Verification Data
 
     %% Step 3: Reference Token Generation
-    Note over Walletron: Verify User.<br/>Generate temporary refId mapped<br/>to Pass Data in DB.
+    Note over Walletron: Verify User.<br/>Generate temporary refId(customerPass.SerialNumber) <br/> mapped to Pass Data in DB.
 
-    %% Step 4: Redirect with refId only
-    Walletron-->>Browser: HTTP 302 Redirect<br/>Location: samsung.link?refId={token}
+    %% Step 4: Redirect with serialNumber
+    Walletron-->>Browser: HTTP 302 Redirect<br/>Location: https://a.swallet.link/atw/v3/<br/>{certificateID}/{cardId@SamsungPortal}Clip?pdata={SerialNumber}
 
     %% Step 5: AppLink Intercept
-    Browser->>SamsungApp: AppLink intercepts URL.<br/>Opens App with refId.
+    Browser->>SamsungApp: AppLink intercepts URL.<br/>Opens App with refId(serialNumber).
 
     %% Step 6: The Data Fetch (Server-to-Server)
     Note over SamsungApp: Samsung initiating Data Fetch...
-    SamsungApp->>SamsungBack: Request pass data for refId
-    SamsungBack->>Walletron: POST /your-data-fetch-endpoint<br/>(Payload includes refId)
-    Note over Walletron: Look up Pass Data by refId.<br/>Generate signed JWS (CData).
+    SamsungApp->>SamsungBack: Request pass data for refId (serialNumber)
+    SamsungBack->>Walletron: POST /partner-get-url@Samsung <br/>(Walletron/api/samsung/cards/{cardId}/{serialNumer})
+    Note over Walletron: Look up Pass Data by refId (serialNumber).<br/>Generate signed JWS (CData).
     Walletron-->>SamsungBack: 200 OK (Payload: Signed JWS)
     SamsungBack-->>SamsungApp: Return signed pass data
 
