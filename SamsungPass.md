@@ -32,10 +32,11 @@ sequenceDiagram
 
     %% Step 7: Save to Wallet
     Note over SamsungApp: Verify Signature, show preview
-    SamsungApp-->>User: Present preview UI
-    User->>SamsungApp: Click "Add"
+    SamsungApp-->>User: Present preview UI and add pass
+    User->>SamsungApp: Click "Done"
     Note over SamsungApp: Save pass locally on device
-```
+
     %% Step 8: Final Callback (Async Webhook)
     SamsungBack->>Walletron: POST /sendCardState API (Event: ADDED)
     Walletron-->>SamsungBack: 200 OK
+```
