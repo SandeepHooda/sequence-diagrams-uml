@@ -9,8 +9,11 @@ sequenceDiagram
     
     Note over WS: Build .pkpass containing: <br/>- passTypeIdentifier (identifies walletron) <br/>- serialNumber (identifies customer) <br/>- webServiceURL (to get updates from apple for pass add/delete) <br/>- authenticationToken (apple uses to make call back to WebServiceUrl)
     
-    WS-->>BW: 200 OK (.pkpass) 
+    WS-->>BW: 200 OK (.pkpass)
+    Note over BW: Apple OS intercepts .pkpass file
+    BW->>U: Present Native UI: "Add to Apple Wallet"
     U->>BW: User taps "Add to Wallet"
+    Note over BW: Pass securely stored<br/>in local Apple
     
     Note right of BW: Apple device POST to webServiceURL 
     BW->>WS: POST /wallet/v1/devices/{deviceLibraryIdentifier}/registrations/{passTypeIdentifier}/{serialNumber} 
